@@ -86,5 +86,11 @@ RSpec.describe User, type: :model do
      user.valid?
      expect(user.errors.full_messages).to include("Kana first name は全角カタカナでの入力が必要。")
     end
+    it "birthdayが空だと登録できない" do
+      user = User.new(nickname: "abc", email: "abc@efg.com", password: "123abc", password_confirmation: "123abc",\
+        last_name: "山口", first_name: "一郎", kana_last_name: "ヤマグチ", kana_first_name: "イチロウ", birthday: "")
+     user.valid?
+     expect(user.errors.full_messages).to include("Birthday can't be blank")
+    end
   end
 end
