@@ -15,6 +15,6 @@ class Item < ApplicationRecord
       validates :prefecture_id
       validates :shipment_date_id
     end
-    validates :price, format: { with: /[1-9]|[1-9][0-9]{2,6}/, message: "は300~9,999,999の範囲の半角数字での入力が必要"}
+    validates :price, numericality: { greater_than_or_equal_to: 300,less_than_or_equal_to: 9999999, message: "は300~9,999,999の範囲の半角数字での入力が必要"}
   end
 end
