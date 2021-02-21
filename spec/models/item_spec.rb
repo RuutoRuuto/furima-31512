@@ -29,27 +29,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
       it "category_idが1だと登録できない" do
-        @item.category_id = "1"
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it "condition_idが1だと登録できない" do
-        @item.condition_id = "1"
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it "charge_type_idが1だと登録できない" do
-        @item.charge_type_id = "1"
+        @item.charge_type_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Charge type can't be blank")
       end
       it "prefecture_idが1だと登録できない" do
-        @item.prefecture_id = "1"
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it "shipment_date_idが1だと登録できない" do
-        @item.shipment_date_id = "1"
+        @item.shipment_date_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipment date can't be blank")
       end
@@ -70,6 +70,16 @@ RSpec.describe Item, type: :model do
       end
       it "priceは全角だ登録できない" do
         @item.price = "５０００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price は300~9,999,999の範囲の半角数字での入力が必要")
+      end
+      it "priceは半角英数混合では登録できない" do
+        @item.price = "5000a"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price は300~9,999,999の範囲の半角数字での入力が必要")
+      end
+      it "priceは半角英数だけでは登録できない" do
+        @item.price = "abcdefg"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は300~9,999,999の範囲の半角数字での入力が必要")
       end
