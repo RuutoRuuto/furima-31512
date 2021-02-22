@@ -127,7 +127,7 @@
     <ul class='item-lists'>
 
       <% unless @item.empty? %>
-        <% @item.reverse_each do |item| %>
+        <% @item.each do |item| %>
           <li class='list'>
             <%= link_to "#" do %>
             <div class='item-img-content'>
