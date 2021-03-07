@@ -45,6 +45,6 @@ class OrdersController < ApplicationController
   end
 
   def check_sold_item
-    redirect_to root_path if (Order.find_by item_id: @item.id) != nil
+    redirect_to root_path if @item.order != nil
   end
 end

@@ -9,6 +9,8 @@ class OrderAddress
     validates :city
     validates :address
     validates :phone_num, format: { with: /\A[0-9]{1,11}\z/, message: 'は11桁以内の数字での入力が必要' }
+    validates :user_id
+    validates :item_id
   end
 
   def save
