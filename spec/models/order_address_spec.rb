@@ -74,6 +74,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone num は11桁以内の数字での入力が必要')
       end
+      it 'phone_numが半角数字はあるが、他の文字が混ざっている' do
+        @order_address.phone_num = '1234ab78901'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone num は11桁以内の数字での入力が必要')
+      end
       it 'ユーザーのidが存在しない場合購入できない' do
         @order_address.user_id = ""
         @order_address.valid?
